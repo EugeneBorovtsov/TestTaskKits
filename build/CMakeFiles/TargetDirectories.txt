@@ -1,0 +1,3 @@
+/home/manjaro/TestTaskKits/build/CMakeFiles/Kits.dir
+/home/manjaro/TestTaskKits/build/CMakeFiles/edit_cache.dir
+/home/manjaro/TestTaskKits/build/CMakeFiles/rebuild_cache.dir
