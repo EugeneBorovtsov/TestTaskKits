@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -27,6 +28,7 @@ class KitsHandler {
     protected:
         vector<DocumentRow> parseDocument(string filePath);
         vector<KitRow> parseKit(string filePath);
+        map<string, int> kitVectorToMap(vector<KitRow> kitVector);
 };
 
 #endif // KITSHANDLER_H

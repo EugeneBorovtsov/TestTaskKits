@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     string kitName = argv[2];
 
     KitsHandler kitsHandler;
-    kitsHandler.isKitInDocument(documentName, kitName);
+    cout << kitsHandler.isKitInDocument(documentName, kitName) << endl;
 
     cout << argc << endl;
     return 0;

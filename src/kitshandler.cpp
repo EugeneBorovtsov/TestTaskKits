@@ -1,12 +1,28 @@
 #include "kitshandler.h"
 #include <sstream>
+#include <vector>
 
 using namespace std;
 
 bool KitsHandler::isKitInDocument(string documentPath, string kitPath) {
     auto documentsRows = parseDocument(documentPath) ;
     auto kitsRows = parseKit(kitPath) ;
+    auto kitsMap = kitVectorToMap(kitsRows);
 
+    for (auto document : documentsRows) {
+        for (auto kit : document.catalogs) {
+            cout << kit << endl;
+            if (kitsMap.count(kit))
+                kitsMap[kit] -= document.amount;
+        }
+    }
+
+    for (auto kitsResult : kitsMap) {
+        cout << kitsResult.second << endl;
+        if (kitsResult.second > 0) {
+            return false;
+        }
+    }
     return true;
 }
 
@@ -57,4 +73,13 @@ vector<KitRow> KitsHandler::parseKit(string filePath) {
     }
 
     return rows;
+}
+
+map<string, int> KitsHandler::kitVectorToMap(vector<KitRow> kitVector) {
+    map<string, int> kitMap; 
+    for (auto kit : kitVector) {
+        kitMap.insert({kit.catalog, kit.amount});     
+    }
+
+    return kitMap;
 }
