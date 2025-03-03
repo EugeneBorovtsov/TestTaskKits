@@ -11,7 +11,6 @@ bool KitsHandler::isKitInDocument(string documentPath, string kitPath) {
 
     for (auto document : documentsRows) {
         for (auto kit : document.catalogs) {
-            cout << kit << endl;
             if (kitsMap.count(kit))
                 kitsMap[kit] -= document.amount;
         }
@@ -25,7 +24,6 @@ bool KitsHandler::isKitInDocument(string documentPath, string kitPath) {
     }
     return true;
 }
-
 vector<DocumentRow> KitsHandler::parseDocument(string filePath) {
     vector<DocumentRow> rows;
     ifstream file(filePath);
@@ -42,12 +40,14 @@ vector<DocumentRow> KitsHandler::parseDocument(string filePath) {
         string catalogsPart;
         getline(issDocument, catalogsPart);
 
-        istringstream issCatalogs(catalogsPart);
-
         if (!catalogsPart.empty()) {
+            istringstream issCatalogs(catalogsPart);
             string catalogName;
-            while (getline(issCatalogs, catalogName, ',')) // Сбор данный о каталогах
+            while (getline(issCatalogs, catalogName, ',')) { // Сбор данных о каталогах
+                catalogName.erase(0, catalogName.find_first_not_of(" "));
+                catalogName.erase(catalogName.find_last_not_of(" ") + 1);
                 row.catalogs.push_back(catalogName);
+            }
         }
 
         rows.push_back(row);
@@ -68,7 +68,7 @@ vector<KitRow> KitsHandler::parseKit(string filePath) {
         KitRow row;
 
         iss >> row.catalog >> row.amount;
-
+        
         rows.push_back(row);
     }
 
