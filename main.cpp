@@ -14,8 +14,9 @@ int main(int argc, char* argv[]) {
     string kitName = argv[2];
 
     KitsHandler kitsHandler;
-    kitsHandler.isKitInDocument(documentName, kitName);
+    if (!kitsHandler.isKitInDocument(documentName, kitName)) {
+        cout << "НАБОР НЕ ВХОДИТ В ДОКУМЕНТ" << endl;
+    }
 
-    cout << argc << endl;
     return 0;
 }
