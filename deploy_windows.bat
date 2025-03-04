@@ -1,11 +1,11 @@
 @echo off
-mkdir build 2>nul
+mkdir build
 cd build
 
 cmake ..
-if %errorlevel% neq 0 exit /b %errorlevel%
 
-make
-if %errorlevel% neq 0 exit /b %errorlevel%
+cmake --build . --config Release
 
-Kits %*
+cd Release
+
+Kits.exe %*
